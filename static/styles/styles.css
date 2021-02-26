@@ -1,0 +1,13 @@
+.nav-item {
+  font-size: larger;
+  margin: 0px 10px;
+}
+.nav-link {
+  padding: 4px;
+}
+header {
+  background-color: #fdf9fc;
+}
+body {
+  margin-top: 52.8px;
+}
