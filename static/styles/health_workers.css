@@ -16,7 +16,8 @@ span {
   font-size: 12px;
 }
 
-button {
+button,
+input[type="submit"] {
   border-radius: 20px;
   border: 1px solid #ff4b2b;
   background-color: #ff4b2b;

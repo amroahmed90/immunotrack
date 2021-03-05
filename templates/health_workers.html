@@ -4,7 +4,7 @@
 body%}
 <div class="container" id="container">
   <div class="form-container sign-up-container">
-    <form action="#">
+    <form action="/health_worker_profile" method="POST">
       <h1>Register</h1>
       <input type="text" placeholder="First Name" name="fname" required />
       <input type="text" placeholder="Middle Name (optional)" name="mname" />
@@ -19,8 +19,15 @@ body%}
         <option value="" disabled selected>
           Choose at which hospital you work
         </option>
-        <option value="stavanger">Stavanger</option>
-        <option value="akerhus">Akerhus</option>
+        <option value="Stavanger Universitetssykehus">
+          Stavanger Universitetssykehus
+        </option>
+        <option value="Akershus Universitetssykehus">
+          Akershus Universitetssykehus
+        </option>
+        <option value="Bergen Universitetssykehus">
+          Bergen Universitetssykehus
+        </option>
       </select>
       <input type="email" placeholder="Email" name="email" required />
       <input type="password" placeholder="Password" name="password" required />
@@ -30,15 +37,16 @@ body%}
         name="password_confirmation"
         required
       />
-      <button>Register</button>
+      <div id="password_confirmation_remark"></div>
+      <input type="submit" value="REGISTER" />
     </form>
   </div>
   <div class="form-container sign-in-container">
-    <form action="#">
+    <form action="#" method="POST">
       <h1>Log in</h1>
-      <input type="email" placeholder="Email" />
-      <input type="password" placeholder="Password" />
-      <button>Log In</button>
+      <input type="email" placeholder="Email" name="email" />
+      <input type="password" placeholder="Password" name="password" />
+      <input type="submit" value="LOG IN" />
     </form>
   </div>
   <div class="overlay-container">

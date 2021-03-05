@@ -1,0 +1,9 @@
+{% extends "layout.html" %} {% block head %}
+<link rel="stylesheet" href="../static/styles/apology.css" />
+{% endblock %} {% block title %} Oops! {% endblock %} {% block body%}
+<h1 class="text-center">Something seems to have gone wrong!</h1>
+<h2 class="text-center">{{ message }}</h2>
+<h3 class="text-center">
+  Please click <a href="{{link}}">here</a> to go back.
+</h3>
+{% endblock %}

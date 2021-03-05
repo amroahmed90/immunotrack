@@ -1,5 +1,5 @@
 from functools import wraps
-from flask import session, redirect
+from flask import session, redirect, render_template
 
 
 def login_required(f):
@@ -14,3 +14,7 @@ def login_required(f):
             return redirect("/login")
         return f(*args, **kwargs)
     return decorated_function
+
+
+def apology(message, link):
+    return render_template("apology.html", message=message, link=link)

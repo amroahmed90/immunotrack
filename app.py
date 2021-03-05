@@ -103,7 +103,7 @@ def health_roker_profile():
             c.execute("""INSERT INTO health_workers (first_name, middle_name, last_name, social_number, work_hospital_id, email, password_hash)
                      VALUES (?, ?, ?, ?, ?, ?, ?)""", (fname, mname, lname, social_number, hospital_id[0][0], email, hashed))
             conn.commit()
-        return "registered"
+        return render_template("health_worker_profile.html")
     # if the method was GET
     else:
         return render_template("health_workers.html")
