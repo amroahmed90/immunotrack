@@ -1,8 +1,10 @@
 import sqlite3
-from helpers import login_required
+from helpers import login_required, apology
 from flask import Flask, request, render_template, redirect, session
 from flask_session import Session
 from tempfile import mkdtemp
+from werkzeug.security import check_password_hash, generate_password_hash
+
 
 # setting up the flask application
 app = Flask(__name__)
@@ -27,12 +29,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 
-# setup the connection to the database
-conn = sqlite3.connect("immunotrack.db")
-
 # default route
-
-
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -41,6 +38,75 @@ def index():
 @app.route("/health_workers")
 def health_workers():
     return render_template("health_workers.html")
+
+
+@app.route("/health_worker_profile", methods=["GET", "POST"])
+# @login_required
+def health_roker_profile():
+    # if the form get submitted
+    if request.method == "POST":
+        # getting the inputs from the registration form and checking these inputs
+        fname = request.form.get("fname")
+        if not fname:
+            return apology("First name was not provided", "/health_workers")
+        mname = request.form.get("mname")
+        lname = request.form.get("lname")
+        if not lname:
+            return apology("Last name was not provided", "/health_workers")
+        social_number = request.form.get("social_number")
+        if not social_number:
+            return apology("Social number was not provided", "/health_workers")
+        # checking if this user has registered before using their unique social_number
+        with sqlite3.connect("immunotrack.db") as conn:
+            # seting up a cursor on which you'll execute sqlite commands
+            c = conn.cursor()
+            c.execute(
+                "SELECT * FROM health_workers WHERE social_number = ?", (social_number,))
+            not_registered = len(c.fetchall())
+            print(not_registered)
+            if not_registered:
+                return apology("This social number has been registered before.", "/health_workers")
+        hospital = request.form.get("hospital")
+        if not hospital:
+            return apology("Place of work (hospital name) was not provided", "/health_workers")
+        email = request.form.get("email")
+        if not email:
+            return apology("Email was not provided", "/health_workers")
+        # checking if this user has registered before using their unique email
+        with sqlite3.connect("immunotrack.db") as conn:
+            # seting up a cursor on which you'll execute sqlite commands
+            c = conn.cursor()
+            c.execute(
+                "SELECT * FROM health_workers WHERE email = ?", (email,))
+            not_registered = len(c.fetchall())
+            print(not_registered)
+            if not_registered:
+                return apology("This email has been registered before.", "/health_workers")
+        password = request.form.get("password")
+        if not password:
+            return apology("Password was not provided", "/health_workers")
+        password_confirmation = request.form.get("password_confirmation")
+        if not password_confirmation:
+            return apology("Password confirmation name was not provided", "/health_workers")
+        # checking if the password input does not match confirmation
+        if password != password_confirmation:
+            return apology("Password does not match the confirmation", "/health_workers")
+        # hashing the passord
+        hashed = generate_password_hash(password)
+        # sql queries
+        with sqlite3.connect("immunotrack.db") as conn:
+            # seting up a cursor on which you'll execute sqlite commands
+            c = conn.cursor()
+            c.execute(
+                "SELECT id FROM hospitals WHERE hospital_name = ?", (hospital,))
+            hospital_id = c.fetchall()
+            c.execute("""INSERT INTO health_workers (first_name, middle_name, last_name, social_number, work_hospital_id, email, password_hash)
+                     VALUES (?, ?, ?, ?, ?, ?, ?)""", (fname, mname, lname, social_number, hospital_id[0][0], email, hashed))
+            conn.commit()
+        return "registered"
+    # if the method was GET
+    else:
+        return render_template("health_workers.html")
 
 
 @app.route("/public_access")
@@ -53,8 +119,6 @@ def about():
     return render_template("about.html")
 
 
-# setup a cursor on which you'll execute sqlite commands
-#c = conn.cursor()
 # execute your commands
 # This is how to insert (question marks as placeholders and tuples)
 ## c.execute("INSERT INTO employees VALUES (?,?,?)", (emp1.first, emp1.last, emp1.pay))
@@ -65,8 +129,5 @@ def about():
 # c.fetchone() # output is tuple
 # c.fetchmeny(3) # output is a list of tuples
 # c.fetchall() #output is a list of tuples
-
 # commit these commands
 # conn.commit()
-# close the connection at the end
-# conn.close()
