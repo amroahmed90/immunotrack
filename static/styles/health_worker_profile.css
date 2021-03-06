@@ -1,0 +1,25 @@
+section {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+section a {
+  margin: auto;
+}
+
+h2 {
+  text-decoration: underline;
+}
+
+section.logout {
+  margin-bottom: 20px;
+}
+
+section.add:hover {
+  background-color: rgba(1, 187, 1, 0.808);
+}
+
+section.logout:hover {
+  background-color: #d14242;
+}
