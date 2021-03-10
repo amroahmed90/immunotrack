@@ -222,7 +222,6 @@ def add_public():
         vaccine_id = None
         print(vaccine_name)
         if vaccine_name != None:
-            vaccine_name = vaccine_name.split("'")[1]
             # check if vaccine type is in db
             with sqlite3.connect("immunotrack.db") as conn:
                 c = conn.cursor()
@@ -275,6 +274,7 @@ def add_public():
             c.execute("SELECT vaccine_name FROM vaccines ORDER BY vaccine_name")
             vaccines = c.fetchall()
             conn.commit()
+            print(vaccines[0][0])
             return render_template("add_public.html", health_worker_data=health_worker_data[0], vaccines=vaccines)
 
 

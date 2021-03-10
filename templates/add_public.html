@@ -155,7 +155,7 @@ endblock %} {% block head %}
           <select name="vaccine_name" id="vaccine_name" class="form-control">
             <option value="" disabled selected>Vaccine Type</option>
             {% for i in range(vaccines|length) %}
-            <option value="{{vaccines[i]}}">{{vaccines[i][0]}}</option>
+            <option value="{{vaccines[i][0]}}">{{vaccines[i][0]}}</option>
             {% endfor %}
           </select>
         </div>
