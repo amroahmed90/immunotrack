@@ -40,11 +40,11 @@ def health_worker_registration():
     # if the form get submitted and no users are logged in
     if (request.method == "POST") and ("user_id" not in session):
         # getting the inputs from the registration form and checking these inputs
-        fname = request.form.get("fname")
+        fname = request.form.get("fname").title()
         if not fname:
             return apology("First name was not provided", "/health_worker_registration")
-        mname = request.form.get("mname")
-        lname = request.form.get("lname")
+        mname = request.form.get("mname").title()
+        lname = request.form.get("lname").title()
         if not lname:
             return apology("Last name was not provided", "/health_worker_registration")
         social_number = request.form.get("social_number")
@@ -62,7 +62,7 @@ def health_worker_registration():
         hospital = request.form.get("hospital")
         if not hospital:
             return apology("Place of work (hospital name) was not provided", "/health_worker_registration")
-        email = request.form.get("email")
+        email = request.form.get("email").lower()
         if not email:
             return apology("Email was not provided", "/health_worker_registration")
         # checking if this user has registered before using their unique email
@@ -118,7 +118,7 @@ def health_worker_login():
     # if the form get submitted and no users are logged in
     if (request.method == "POST") and ("user_id" not in session):
         # getting the inputs from the registration form and checking these inputs
-        email = request.form.get("email")
+        email = request.form.get("email").lower()
         if not email:
             return apology("Email was not provided.", "/health_worker_registration")
         password = request.form.get("password")
@@ -151,7 +151,7 @@ def health_worker_login():
 
 
 @app.route("/health_worker_profile")
-# @login_required
+@login_required
 def health_worker_profile():
     # get the logged in health worker
     with sqlite3.connect("immunotrack.db") as conn:
@@ -169,6 +169,113 @@ def health_worker_profile():
                 WHERE health_workers.id = ?;''', (session["user_id"],))
         user_data = c.fetchall()
         return render_template("health_worker_profile.html", user_data=user_data[0])
+
+
+# a route to handle adding new public (patient\vaccine taker) record
+@app.route("/add_public", methods=["POST", "GET"])
+@login_required
+def add_public():
+    if request.method == "POST":
+        # getting the inputs from the registration form and checking these inputs
+        first_name = request.form.get("first_name").title()
+        if not first_name:
+            return apology("First name was not provided", "/health_worker_registration")
+        middle_name = request.form.get("middle_name").title()
+        last_name = request.form.get("last_name").title()
+        if not last_name:
+            return apology("Last name was not provided", "/health_worker_registration")
+        social_number = request.form.get("social_number")
+        if not social_number:
+            return apology("Social number was not provided", "/health_worker_registration")
+        # checking if this user has registered before using their unique social_number
+        with sqlite3.connect("immunotrack.db") as conn:
+            # seting up a cursor on which you'll execute sqlite commands
+            c = conn.cursor()
+            c.execute(
+                "SELECT * FROM public WHERE social_number = ?", (social_number,))
+            not_registered = len(c.fetchall())
+            if not_registered:
+                # note: direct to update info url when set up
+                return apology("This social number has been registered before.", "/health_worker_registration")
+        email = request.form.get("email").lower()
+        if not email:
+            return apology("Email was not provided.", "/health_worker_registration")
+        # checking if this user has registered before using their unique email
+        with sqlite3.connect("immunotrack.db") as conn:
+            # seting up a cursor on which you'll execute sqlite commands
+            c = conn.cursor()
+            c.execute(
+                "SELECT * FROM public WHERE email = ?", (email,))
+            not_registered = len(c.fetchall())
+            if not_registered:
+                # note: direct to update info url when set up
+                return apology("This email has been registered before.", "/health_worker_registration")
+        pre_infected = 1 if request.form.get(
+            "pre_infected") == "yes" else 0
+        pre_infection_date = request.form.get("pre_infection_date")
+        pre_reinfected = 1 if request.form.get(
+            "pre_reinfected") == "yes" else 0
+        pre_reinfection_date = request.form.get("pre_reinfection_date")
+        vaccinated = 1 if request.form.get(
+            "vaccinated") == "yes" else 0
+        vaccine_name = request.form.get("vaccine_name")
+        vaccine_id = None
+        print(vaccine_name)
+        if vaccine_name != None:
+            vaccine_name = vaccine_name.split("'")[1]
+            # check if vaccine type is in db
+            with sqlite3.connect("immunotrack.db") as conn:
+                c = conn.cursor()
+                c.execute("SELECT id FROM vaccines WHERE vaccine_name = ?",
+                          (vaccine_name, ))
+                vaccine_id = c.fetchall()
+                conn.commit()
+                if not len(vaccine_id):
+                    return apology("The vaccine you chose is not in the list. Make sure you choose from the list provided or contact us if the vaccine is not in the list.", "/add_public")
+                # get vaccine id
+                vaccine_id = vaccine_id[0][0]
+                print(vaccine_id)
+        vaccinating_person_id = session["user_id"]
+        vaccination_date_1 = request.form.get("first_vaccination_date")
+        vaccination_date_2 = request.form.get("second_vaccination_date")
+        post_infected = 1 if request.form.get(
+            "post_infected") == "yes" else 0
+        post_infection_date = request.form.get("post_infection_date")
+        # insert record to public table in the db
+        # store registered record in the variable record
+        with sqlite3.connect("immunotrack.db") as conn:
+            c = conn.cursor()
+            # retrieving the vaccination hospital id
+            c.execute('''SELECT hospitals.id 
+            FROM hospitals 
+            JOIN health_workers 
+            ON health_workers.work_hospital_id = hospitals.id 
+            WHERE health_workers.id = ?;''', (session["user_id"], ))
+            vaccination_hospital_id = c.fetchall()
+            conn.commit()
+            c.execute('''INSERT INTO public 
+            (first_name, middle_name, last_name,                                                                                                   social_number, email, pre_infected, pre_infection_date, pre_reinfected, pre_reinfection_date, vaccinated, vaccine_type, vaccination_hospital_id, vaccinating_person_id, vaccination_date_1, vaccination_date_2, post_infected, post_infection_date) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''', (first_name, middle_name, last_name, social_number, email, pre_infected, pre_infection_date, pre_reinfected, pre_reinfection_date, vaccinated, vaccine_id, vaccination_hospital_id[0][0], vaccinating_person_id, vaccination_date_1, vaccination_date_2, post_infected, post_infection_date))
+            conn.commit()
+            return render_template("success.html")
+
+    else:
+        with sqlite3.connect("immunotrack.db") as conn:
+            c = conn.cursor()
+            c.execute(
+                '''SELECT health_workers.first_name,
+                health_workers.middle_name,
+                health_workers.last_name,
+                hospitals.hospital_name
+                FROM health_workers
+                JOIN hospitals
+                ON health_workers.work_hospital_id=hospitals.id
+                WHERE health_workers.id = ?;''', (session["user_id"],))
+            health_worker_data = c.fetchall()
+            conn.commit()
+            c.execute("SELECT vaccine_name FROM vaccines ORDER BY vaccine_name")
+            vaccines = c.fetchall()
+            conn.commit()
+            return render_template("add_public.html", health_worker_data=health_worker_data[0], vaccines=vaccines)
 
 
 @app.route("/public_access")

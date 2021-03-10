@@ -1,0 +1,12 @@
+{% extends "layout.html" %} {% block title %} Record Registered | ImmunoTrack {%
+endblock %} {% block head %}
+<link rel="stylesheet" href="../static/styles/success.css" /> {% endblock %} {%
+block body%}
+<h1 class="text-center">This record has been registered successfully.</h1>
+<h2 class="text-center">
+  Please click <a href="/add_public">here</a> to add a new one.
+</h2>
+<script>
+  style_active_link(1);
+</script>
+{% endblock %}

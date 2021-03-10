@@ -11,7 +11,7 @@ def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if session.get("user_id") is None:
-            return redirect("/login")
+            return apology("You have to be logged in to access this page.", "/health_worker_login")
         return f(*args, **kwargs)
     return decorated_function
 

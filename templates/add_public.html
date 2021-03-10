@@ -1,0 +1,224 @@
+{% extends "layout.html" %} {% block title %} Add Record | ImmunoTrack {%
+endblock %} {% block head %}
+<link rel="stylesheet" href="../static/styles/add_public.css" />
+<script src="../static/scripts/add_public.js"></script>
+{% endblock %} {% block body%}
+<h1 class="text-center">Add a new public record</h1>
+<form action="/add_public" method="POST">
+  <div class="row no-guttoers">
+    <div class="col-3"></div>
+    <section class="col-6">
+      <h2>Personal Information</h2>
+      <div class="row">
+        <div class="col-md form-group">
+          <input
+            class="form-control"
+            type="text"
+            name="first_name"
+            placeholder="First Name.."
+            required
+          />
+        </div>
+        <div class="col-md form-group">
+          <input
+            type="text"
+            name="middle_name"
+            class="form-control"
+            placeholder="Middle Name.."
+          />
+        </div>
+        <div class="col-md form-group">
+          <input
+            class="form-control"
+            type="text"
+            name="last_name"
+            placeholder="Last Name.."
+            required
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md form-group">
+          <input
+            class="form-control"
+            type="number"
+            name="social_number"
+            placeholder="Social Number.."
+            required
+          />
+        </div>
+        <div class="col-md form-group">
+          <input
+            type="email"
+            name="email"
+            placeholder="Email.."
+            class="form-control"
+            required
+          />
+        </div>
+      </div>
+    </section>
+    <div class="col-3"></div>
+  </div>
+  <div class="row">
+    <div class="col-3"></div>
+    <section class="col-6">
+      <h2>Infection Record</h2>
+      <div class="form-group">
+        Have you been infected with the virus before?
+        <input
+          type="radio"
+          name="pre_infected"
+          id="infected"
+          value="yes"
+          onclick="show_hide_block('infected','infection-details')"
+        />
+        <label for="infected">Yes</label>
+        <input
+          type="radio"
+          name="pre_infected"
+          id="not_infected"
+          value="no"
+          onclick="show_hide_block('infected','infection-details')"
+        />
+        <label for="not_infected">No</label>
+      </div>
+      <div id="infection-details">
+        <div class="form-group">
+          <label for="pre_infection_date">First Infection Date: </label>
+          <input
+            type="date"
+            name="pre_infection_date"
+            id="pre_infection_date"
+            class="form-control"
+          />
+        </div>
+        <div class="form-group">
+          Have you been infected again for a second time?
+          <input
+            type="radio"
+            name="pre_reinfected"
+            id="reinfected"
+            value="yes"
+            onclick="show_hide_block('reinfected','reinfection-details')"
+          />
+          <label for="reinfected">Yes</label>
+          <input
+            type="radio"
+            name="pre_reinfected"
+            id="not_reinfected"
+            value="no"
+            onclick="show_hide_block('reinfected','reinfection-details')"
+          />
+          <label for="not_reinfected">No</label>
+        </div>
+        <div class="form-group" id="reinfection-details">
+          <label for="pre_reinfection_date">Second Infection Date: </label>
+          <input type="date" name="pre_reinfection_date" class="form-control" />
+        </div>
+      </div>
+    </section>
+    <div class="col-3"></div>
+  </div>
+  <div class="row">
+    <div class="col-3"></div>
+    <section class="col-6">
+      <h2>Vaccination Record</h2>
+      <div class="form-group">
+        Have you been vaccinated against the virus before?
+        <input
+          type="radio"
+          name="vaccinated"
+          id="vaccinated"
+          value="yes"
+          onclick="show_hide_block('vaccinated','vaccination-details')"
+        />
+        <label for="vaccinated">Yes</label>
+        <input
+          type="radio"
+          name="vaccinated"
+          id="not_vaccinated"
+          value="no"
+          onclick="show_hide_block('vaccinated','vaccination-details')"
+        />
+        <label for="not_vaccinated">No</label>
+      </div>
+      <div id="vaccination-details">
+        <div>
+          <strong>Vaccinating Personnel: </strong> {{health_worker_data[0]}}
+          {{health_worker_data[1]}} {{health_worker_data[2]}}
+        </div>
+        <p></p>
+        <div><strong>Hospital: </strong> {{health_worker_data[3]}}</div>
+        <p></p>
+        <div class="form-group">
+          <select name="vaccine_name" id="vaccine_name" class="form-control">
+            <option value="" disabled selected>Vaccine Type</option>
+            {% for i in range(vaccines|length) %}
+            <option value="{{vaccines[i]}}">{{vaccines[i][0]}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="first_vaccination_date">First Vaccination Date: </label>
+          <input
+            type="date"
+            name="first_vaccination_date"
+            id="first_vaccination_date"
+            class="form-control"
+          />
+        </div>
+        <div class="form-group">
+          <label for="second_vaccination_date">Second Vaccination Date: </label>
+          <input
+            type="date"
+            name="second_vaccination_date"
+            class="form-control"
+          />
+        </div>
+        <div class="form-group">
+          Have you been re-infected with the virus after being vaccinated?
+          <input
+            type="radio"
+            name="post_infected"
+            id="post_infected"
+            value="yes"
+            onclick="show_hide_block('post_infected','post-infection-details')"
+          />
+          <label for="post_infected">Yes</label>
+          <input
+            type="radio"
+            name="post_infected"
+            id="not_post_infected"
+            value="no"
+            onclick="show_hide_block('post_infected','post-infection-details')"
+          />
+          <label for="not_post_infected">No</label>
+          <div class="form-group" id="post-infection-details">
+            <label for="post_infection_date"
+              >Post-vaccine Infection Date:
+            </label>
+            <input
+              type="date"
+              name="post_infection_date"
+              class="form-control"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="col-3"></div>
+  </div>
+  <div class="row last">
+    <div class="col-3"></div>
+    <div class="col-6 text-center add-div">
+      <input type="submit" value="Add Public Record" class="add-button" />
+    </div>
+    <div class="col-3"></div>
+  </div>
+</form>
+
+<script>
+  style_active_link(1);
+</script>
+{% endblock %}

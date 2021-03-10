@@ -18,7 +18,7 @@ endblock %} {% block body%}
         <div class="row">
           <div class="col-4">
             <p>
-              <b>Name :</b>
+              <strong>Name :</strong>
             </p>
           </div>
           <div class="col-8">
@@ -29,18 +29,16 @@ endblock %} {% block body%}
         <div class="row">
           <div class="col-4">
             <p>
-              <b>Email :</b>
+              <strong>Email :</strong>
             </p>
           </div>
-          <div class="col-8">
-            <p>{{ user_data[4] }}</p>
-          </div>
+          <div class="col-8"><p>{{ user_data[4] }}</p></div>
         </div>
 
         <div class="row">
           <div class="col-4">
             <p>
-              <b>Work Hospital :</b>
+              <strong>Work Hospital :</strong>
             </p>
           </div>
           <div class="col-8">
@@ -48,21 +46,18 @@ endblock %} {% block body%}
           </div>
         </div>
       </section>
-      <section class="text-center add" style="background-color: darkgreen">
-        <a href="./public_access.html" class="text-center" style="color: white"
-          ><h3>+ Add a new patient or vaccination record +</h3></a
+      <section class="text-center add">
+        <a href="/add_public" class="text-center add"
+          ><h3>Add a new patient or vaccination record</h3></a
         >
       </section>
-      <section class="text-center logout" style="background-color: #a62626">
-        <a href="./public_access.html" class="text-center" style="color: white"
-          ><h3>Log Out</h3></a
-        >
+      <section class="text-center logout">
+        <a href="/logout" class="text-center logout"><h3>Log Out</h3></a>
       </section>
     </div>
     <div class="col-2"></div>
   </div>
 </main>
-<script src="../static/scripts/layout.js"></script>
 <script>
   style_active_link(1);
 </script>

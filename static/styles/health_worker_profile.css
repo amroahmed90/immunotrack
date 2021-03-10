@@ -16,10 +16,24 @@ section.logout {
   margin-bottom: 20px;
 }
 
-section.add:hover {
-  background-color: rgba(1, 187, 1, 0.808);
+.add {
+  color: #fff;
+  background-color: darkgreen;
 }
 
-section.logout:hover {
+.logout {
+  color: #fff;
+  background-color: #a62626;
+}
+
+.add:hover {
+  color: #fff;
+  background-color: rgba(1, 187, 1, 0.808);
+  text-decoration: none;
+}
+
+.logout:hover {
+  color: #fff;
   background-color: #d14242;
+  text-decoration: none;
 }
