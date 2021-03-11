@@ -16,8 +16,7 @@ span {
   font-size: 12px;
 }
 
-button,
-input[type="submit"] {
+button {
   border-radius: 20px;
   border: 1px solid #ff4b2b;
   background-color: #ff4b2b;
@@ -29,6 +28,24 @@ input[type="submit"] {
   letter-spacing: 1px;
   text-transform: uppercase;
   transition: transform 80ms ease-in;
+}
+
+input[type="submit"] {
+  border-radius: 20px;
+  border: 1px solid #ff4b2b;
+  background-color: #ff4b2b;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: bold;
+  margin: 8px 0px;
+  padding: 12px auto;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
+}
+
+::placeholder {
+  font-size: 70%;
 }
 
 button:active {
