@@ -1,6 +1,49 @@
-{% extends "layout.html" %} {% block title %} Home | ImmunoTrack {% endblock %}
-{% block body%}
-<h1 class="text-center">Home</h1>
+{% extends "layout.html" %} {% block head %}
+<link rel="stylesheet" href="../static/styles/index.css" /> {% endblock %} {%
+block title %} Home | ImmunoTrack {% endblock %} {% block body%}
+<!--setting up the major layout of the page-->
+<div class="container">
+  <div class="row">
+    <!--left column-->
+    <div class="col-1"></div>
+    <!--middle column-->
+    <div class="col-10">
+      <!--first section is for world vaccination stats-->
+      <section class="container">
+        <h1 class="text-center">World Vaccinations Statistics</h1>
+        <div class="row">
+          <div
+            class="col-sm-4 d-flex justify-content-center left-div"
+            id="first-div"
+          ></div>
+          <div
+            class="col-sm-8 d-flex justify-content-center right-div"
+            id="second-div"
+          >
+            <!-- autoco,plete for with countries -->
+            <form autocomplete="off" action="/action_page.php">
+              <div class="autocomplete">
+                <input
+                  id="myInput"
+                  type="text"
+                  name="myCountry"
+                  placeholder="Country"
+                />
+              </div>
+              <input type="submit" value="Submit" />
+            </form>
+          </div>
+        </div>
+      </section>
+    </div>
+    <!--right column-->
+    <div class="col-1"></div>
+  </div>
+</div>
+<script src="../static/scripts/index.js"></script>
+<script>
+  autocomplete(document.getElementById("myInput"), countries);
+</script>
 <script>
   style_active_link(0);
 </script>
