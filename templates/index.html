@@ -43,14 +43,14 @@ block title %} Home | ImmunoTrack {% endblock %} {% block body%}
 </div>
 <script src="../static/scripts/index.js"></script>
 <script>
-  var country_list = JSON.parse('{{ country_list | tojson | safe }}');
+  var country_list = JSON.parse('{{ country_list | tojson }}');
   console.log(country_list);
   var countries = [];
   for (var i = 0; i < country_list.length; i++) {
     countries.push(country_list[i].country);
   }
   console.log(countries);
-  autocomplete(document.getElementById('myInput'), countries);
+  autocomplete(document.getElementById('myInput'), country_list);
 </script>
 <script>
   style_active_link(0);

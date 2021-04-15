@@ -3,7 +3,7 @@ section {
 }
 .left-div {
   height: 200px;
-  background-image: url("../images/covid-vaccine.jpg");
+  background-image: url('../images/covid-vaccine.jpg');
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -22,19 +22,23 @@ section {
 input {
   border: 1px solid transparent;
   background-color: #f1f1f1;
-  padding: 10px;
-  font-size: 16px;
+  padding: 0.5vw;
+  font-size: 2vw;
   border-radius: 5px;
 }
-input[type="text"] {
-  background-color: #f1f1f1;
-  width: 100%;
+form {
+  margin: auto;
 }
-input[type="submit"] {
+input[type='text'] {
+  background-color: #f1f1f1;
+  width: 20vw;
+}
+input[type='submit'] {
   background-color: DodgerBlue;
   color: #fff;
 }
 .autocomplete-items {
+  font-size: 2vw;
   position: absolute;
   border: 1px solid #d4d4d4;
   border-bottom: none;
