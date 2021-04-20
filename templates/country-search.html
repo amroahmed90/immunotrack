@@ -21,29 +21,49 @@ block title %} Home | ImmunoTrack {% endblock %} {% block body%}
         <input type="submit" value="Submit" />
       </form>
       <div class="search-results">
-        <h2 class="text-center">{{ country_dict.country }}</h2>
-        <ul>
-          <strong></strong>
-          <li>
-            <strong>Total Vaccinations: </strong>
-            {{ country_dict.total_vaccinations }}
-          </li>
-          <li>
-            <strong>People Vaccinated (1 shot): </strong>
-            {{country_dict.people_vaccinated }}
-          </li>
-          <li>
-            <strong>People Fully Vaccinated (2 shots): </strong>
-            {{country_dict.people_fully_vaccinated }}
-          </li>
-          <li>
-            <strong>Last updated: </strong> {{ country_dict.last_updated }}
-          </li>
-          <li>
-            <strong>Source: </strong
-            ><a href="{{ country_dict.source }}"><em>here.</em></a>
-          </li>
-        </ul>
+        <h2 class="text-center">
+          <i class="fas fa-map-marker-alt"></i>
+          {{ country_dict.country }}
+          <i class="fas fa-map-marker-alt"></i>
+        </h2>
+
+        <div class="sub-search-results">
+          <div class="sub-flex">
+            <h3 class="text-center">Total Vaccinations</h3>
+            <p class="text-center">
+              <sub>
+              {{country_dict.vaccines }}
+              </sub>
+            </p>
+            <h3 class="text-center">
+              <i class="fas fa-prescription-bottle"></i>
+            </h3>
+            <p class="text-center">{{ country_dict.total_vaccinations }}</p>
+          </div>
+          <div class="sub-flex">
+            <h3 class="text-center">People Vaccinated</h3>
+            <h3 class="text-center">(1 shot)</h3>
+            <h3 class="text-center"><i class="fas fa-syringe"></i></h3>
+            <p class="text-center">{{ country_dict.people_vaccinated }}</p>
+          </div>
+          <div class="sub-flex">
+            <h3 class="text-center">Fully Vaccinated</h3>
+            <h3 class="text-center">(2 shots)</h3>
+            <h3 class="text-center">
+              <i class="fas fa-syringe"></i>
+              <i class="fas fa-syringe"></i>
+            </h3>
+            <p class="text-center">
+              {{ country_dict.people_fully_vaccinated }}
+            </p>
+          </div>
+        </div>        
+        <sub class="floated-left"><strong>Last updated: </strong> {{ country_dict.last_updated }}</sub>
+        
+        <sub class="floated-right">
+          <strong>Source: </strong
+          ><a href="{{ country_dict.source }}"><em>here.</em></a>
+        </p>
       </div>
     </div>
     <div class="side-gutter"></div>
