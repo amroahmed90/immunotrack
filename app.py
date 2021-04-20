@@ -1,11 +1,10 @@
 import sqlite3
-from helpers import login_required, apology
+from helpers import login_required, apology, get_country_list, get_country_data
 from flask import Flask, request, render_template, redirect, session
 from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.security import check_password_hash, generate_password_hash
 import csv
-import io
 import urllib.request
 
 
@@ -33,40 +32,25 @@ Session(app)
 
 
 # default route
-@app.route("/", methods=["GET", "POST"])
+@app.route("/")
 def index():
-    if request.method == "GET":
-        # getting the list of countries in the online database
-        url_locations = "https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/vaccinations/locations.csv"
-        # storing the list of countries
-        locations_page = urllib.request.urlopen(url_locations)
-        locations_page_lines = [l.decode('utf-8')
-                                for l in locations_page.readlines()]
-        locations_reader = csv.reader(locations_page_lines)
-        country_list = []
-        for location in locations_reader:
-            if location[0] != 'location':  # to skip the first row (header)
-                country_dict = {}
-                country_dict['country'] = location[0]
-                country_dict['vaccines'] = location[2]
-                country_dict['source_name'] = location[4]
-                country_dict['source_link'] = location[5]
-                country_list.append(location[0])
-                # creating a dict with the country info
-                # url_country_info = "https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/vaccinations/country_data/" + \
-                #     location[0].replace(" ", "%20") + ".csv"
-                # country_page = urllib.request.urlopen(url_country_info)
-                # country_page_lines = [l.decode('utf-8')
-                #                       for l in country_page.readlines()]
-                # country_reader = csv.reader(country_page_lines)
-                # for data in country_reader:
-                #     country_dict['total_vaccinations'] = data[4]
-                #     country_dict['people_vaccinated'] = data[5]
-                #     country_dict['people_totally_vaccinated'] = data[6]
-                # country_list.append(country_dict)
-        return render_template("index.html", country_list=country_list)
-    else:
-        return render_template("index.html")
+    country_list = get_country_list()
+    return render_template("index.html", country_list=country_list)
+
+
+@app.route("/country-search", methods=["POST", "GET"])
+def country_search():
+    country_list = get_country_list()
+    try:
+        country = request.form.get("myCountry").title()
+    except:
+        return apology("Please make you sure you typed the country name correctly.", "/")
+    if country not in country_list:
+        return apology("Please make you sure you typed the country name correctly.", "/")
+    # get the vaccination data on the requested country
+    country_dict = get_country_data(country)
+    print(country_dict)
+    return render_template("country-search.html", country_list=country_list, country_dict=country_dict)
 
 
 @app.route("/health_worker_registration", methods=["POST", "GET"])

@@ -1,16 +1,49 @@
-section {
-  margin-bottom: 20px;
+/* defining universal variables */
+:root {
+  --dark-red: #ac2626;
+  --baltic-sea-color: #343a40;
+  --white-smoke: #f1f1f1;
 }
-.left-div {
-  height: 200px;
+
+/* styling the main layout */
+main {
+  display: flex;
+  flex-direction: column;
+}
+.flex {
+  display: flex;
+  flex-direction: row;
+}
+.side-gutter {
+  flex: 1;
+}
+.middle-subsection {
+  flex: 10;
+}
+
+.country-search {
   background-image: url('../images/covid-vaccine.jpg');
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
+  padding: 20vh 2vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.revert {
+  padding: 2vh 2vw;
 }
 
-.right-div {
-  padding: 10px;
-  background-image: linear-gradient(to bottom right, #373735, #eac7c5);
+.country-search h1 {
+  color: #fff;
+  text-shadow: 0 0 5px var(--baltic-sea-color);
+  font-size: 4vw;
+  margin: 0 0 3vh 0;
+}
+
+form {
+  margin: 0 auto 5vh auto;
 }
 
 /* styleing the dynamic input field*/
@@ -21,20 +54,20 @@ section {
 }
 input {
   border: 1px solid transparent;
-  background-color: #f1f1f1;
+  background-color: var(--white-smoke);
   padding: 0.5vw;
   font-size: 2vw;
   border-radius: 5px;
 }
-form {
-  margin: auto;
-}
+
 input[type='text'] {
-  background-color: #f1f1f1;
+  background-color: var(--white-smoke);
+  box-shadow: 0 0 5px var(--baltic-sea-color);
   width: 20vw;
 }
 input[type='submit'] {
-  background-color: DodgerBlue;
+  background-color: var(--dark-red);
+  box-shadow: 0 0 5px var(--baltic-sea-color);
   color: #fff;
 }
 .autocomplete-items {
@@ -63,4 +96,22 @@ input[type='submit'] {
   /*when navigating through the items using the arrow keys:*/
   background-color: DodgerBlue !important;
   color: #ffffff;
+}
+
+.search-results {
+  background-color: rgba(51, 50, 48, 0.8);
+  border: #fff solid 2px;
+  margin: 1vw;
+}
+.search-results * {
+  color: #fff;
+}
+
+@media screen and (max-width: 640px) {
+  .country-search {
+    padding: 15vh 1vw;
+  }
+  .middle-subsection {
+    flex: 20;
+  }
 }

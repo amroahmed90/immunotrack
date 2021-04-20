@@ -1,0 +1,77 @@
+{% extends "layout.html" %} {% block head %}
+<link rel="stylesheet" href="../static/styles/index.css" /> {% endblock %} {%
+block title %} Home | ImmunoTrack {% endblock %} {% block body%}
+<main>
+  <section class="flex">
+    <div class="side-gutter"></div>
+    <div class="middle-subsection country-search revert">
+      <h1 class="text-center">World Vaccinations Statistics</h1>
+      <!-- autocomplete form with countries -->
+      <form autocomplete="off" action="/country-search" method="POST">
+        <div class="autocomplete">
+          <input
+            id="myInput"
+            type="text"
+            name="myCountry"
+            placeholder="Country"
+            data="{{county_list}}"
+            required
+          />
+        </div>
+        <input type="submit" value="Submit" />
+      </form>
+      <div class="search-results">
+        <h2 class="text-center">{{ country_dict.country }}</h2>
+        <ul>
+          <strong></strong>
+          <li>
+            <strong>Total Vaccinations: </strong>
+            {{ country_dict.total_vaccinations }}
+          </li>
+          <li>
+            <strong>People Vaccinated (1 shot): </strong>
+            {{country_dict.people_vaccinated }}
+          </li>
+          <li>
+            <strong>People Fully Vaccinated (2 shots): </strong>
+            {{country_dict.people_fully_vaccinated }}
+          </li>
+          <li>
+            <strong>Last updated: </strong> {{ country_dict.last_updated }}
+          </li>
+          <li>
+            <strong>Source: </strong
+            ><a href="{{ country_dict.source }}"><em>here.</em></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="side-gutter"></div>
+  </section>
+  <div class="side-gutter"></div>
+</main>
+
+<!-- 
+  {
+    'country': 'Saudi Arabia', 
+    'total_vaccinations': '7136669', 
+    'people_vaccinated': 0, 
+    'people_fully_vaccinated': 0, 
+    'last_updated': '2021-04-18', 
+    'vaccines': 'Oxford/AstraZeneca, Pfizer/BioNTech', 
+    'source': 'https://coronamap.sa'
+  }
+ -->
+
+<script src="../static/scripts/index.js"></script>
+<script>
+  var country_list = JSON.parse('{{ country_list | tojson }}');
+  console.log(country_list);
+  var country_dict = JSON.parse('{{ country_dict | tojson }}');
+  console.log(country_dict);
+  autocomplete(document.getElementById('myInput'), country_list);
+</script>
+<script>
+  style_active_link(0);
+</script>
+{% endblock %}
