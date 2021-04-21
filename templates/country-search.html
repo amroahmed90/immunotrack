@@ -32,19 +32,19 @@ block title %} Home | ImmunoTrack {% endblock %} {% block body%}
             <h3 class="text-center">Total Vaccinations</h3>
             <p class="text-center">
               <sub>
-              {{country_dict.vaccines }}
+              {{ country_dict.vaccines }}
               </sub>
             </p>
             <h3 class="text-center">
               <i class="fas fa-prescription-bottle"></i>
             </h3>
-            <p class="text-center">{{ country_dict.total_vaccinations }}</p>
+            <p class="text-center">{{ format_number(country_dict.total_vaccinations) }}</p>
           </div>
           <div class="sub-flex">
             <h3 class="text-center">People Vaccinated</h3>
             <h3 class="text-center">(1 shot)</h3>
             <h3 class="text-center"><i class="fas fa-syringe"></i></h3>
-            <p class="text-center">{{ country_dict.people_vaccinated }}</p>
+            <p class="text-center">{{ format_number(country_dict.people_vaccinated) }}</p>
           </div>
           <div class="sub-flex">
             <h3 class="text-center">Fully Vaccinated</h3>
@@ -54,7 +54,7 @@ block title %} Home | ImmunoTrack {% endblock %} {% block body%}
               <i class="fas fa-syringe"></i>
             </h3>
             <p class="text-center">
-              {{ country_dict.people_fully_vaccinated }}
+              {{ format_number(country_dict.people_fully_vaccinated) }}
             </p>
           </div>
         </div>        

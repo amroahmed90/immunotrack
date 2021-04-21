@@ -1,5 +1,5 @@
 import sqlite3
-from helpers import login_required, apology, get_country_list, get_country_data
+from helpers import login_required, apology, get_country_list, get_country_data, format_number
 from flask import Flask, request, render_template, redirect, session
 from flask_session import Session
 from tempfile import mkdtemp
@@ -14,8 +14,13 @@ app = Flask(__name__)
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
+# custom filter
+app.jinja_env.filters["format_number"] = format_number
+app.jinja_env.globals.update(format_number=format_number)
 
 # Ensure responses aren't cached
+
+
 @app.after_request
 def after_request(response):
     response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"

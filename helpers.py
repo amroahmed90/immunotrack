@@ -77,3 +77,7 @@ def get_country_data(country):
         if check_number(data[6], country_dict["people_fully_vaccinated"]):
             country_dict["people_fully_vaccinated"] = data[6]
     return country_dict
+
+
+def format_number(value):
+    return format(int(value), ',d')
