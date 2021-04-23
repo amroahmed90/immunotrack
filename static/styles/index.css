@@ -1,9 +1,4 @@
-/* defining universal variables */
-:root {
-  --dark-red: #ac2626;
-  --baltic-sea-color: #343a40;
-  --white-smoke: #f1f1f1;
-}
+@import './styles.css';
 
 /* styling the main layout */
 main {
@@ -14,10 +9,14 @@ main {
   display: flex;
   flex-direction: row;
 }
+.wrap {
+  flex-wrap: wrap;
+}
 .side-gutter {
   flex: 1;
 }
 .middle-subsection {
+  margin: 3vw 0;
   flex: 10;
 }
 
@@ -27,7 +26,6 @@ main {
   background-size: cover;
   background-position: center;
   padding: 20vh 2vw;
-  margin-bottom: 2vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -128,6 +126,93 @@ input[type='submit'] {
 }
 .floated-right {
   float: right;
+}
+
+/* styling the seaction.sub-nav in the main page */
+.how-it-works {
+  background-image: url('../images/sub_background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* Next line is defined in the root of styles.css */
+  margin-bottom: var(--minimum-footer-height);
+}
+.sub-nav {
+  padding: 0;
+  margin-bottom: 0;
+}
+.sub-nav li {
+  display: inline;
+  font-size: 2vw;
+}
+.sub-nav li label {
+  margin-bottom: 0;
+}
+
+#health-workers-tab,
+#public-tab,
+#researchers-tab {
+  display: none;
+}
+
+label[for='health-workers-tab'],
+label[for='public-tab'],
+label[for='researchers-tab'] {
+  padding: 0 0.7vw;
+  font-size: 3vw;
+}
+
+#health-workers-tab:checked ~ label[for='health-workers-tab'],
+#public-tab:checked ~ label[for='public-tab'],
+#researchers-tab:checked ~ label[for='researchers-tab'] {
+  border-bottom: var(--dark-red) 3px solid;
+}
+
+#health-workers-sub-section,
+#public-sub-section,
+#researchers-sub-section {
+  box-shadow: 0 2px 5px #000;
+}
+
+.half-screen {
+  width: 50%;
+  padding: 2.5vw;
+}
+.half-screen ul {
+  padding-inline-start: 4vw;
+}
+.half-screen li {
+  font-size: 2vw;
+}
+.text {
+  background-color: #fff;
+}
+.image1,
+.image2,
+.image3 {
+  background-position: center top;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.image1 {
+  background-image: url('../images/health-workers.jpg');
+}
+.image2 {
+  background-image: url('../images/public.jpg');
+}
+.image3 {
+  background-image: url('../images/researchers.jpg');
+}
+
+.transition {
+  animation: opacity 500ms 1 forwards ease-in-out;
+}
+@keyframes opacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @media screen and (max-width: 640px) {

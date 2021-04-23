@@ -1,3 +1,11 @@
+/* defining universal variables */
+:root {
+  --dark-red: #ac2626;
+  --baltic-sea-color: #343a40;
+  --white-smoke: #f1f1f1;
+  --minimum-footer-height: 6vh;
+}
+
 .nav-item {
   font-size: larger;
   margin: 0px 10px;
@@ -10,6 +18,8 @@ header {
 }
 body {
   margin-top: 52.8px;
+  position: relative;
+  padding-bottom: var(--minimum-footer-height);
 }
 
 * h1 {
@@ -24,4 +34,13 @@ body {
 
 * p {
   font-size: 2vw;
+}
+
+footer {
+  background-color: var(--baltic-sea-color);
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  min-height: var(--minimum-footer-height);
 }

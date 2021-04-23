@@ -12,10 +12,11 @@ block title %} Home | ImmunoTrack {% endblock %} {% block body%}
           <input
             id="myInput"
             type="text"
-            name="myCountry"
+            name="country"
             placeholder="Country"
             data="{{county_list}}"
             required
+            autofocus
           />
         </div>
         <input type="submit" value="Submit" />
@@ -68,27 +69,81 @@ block title %} Home | ImmunoTrack {% endblock %} {% block body%}
     </div>
     <div class="side-gutter"></div>
   </section>
-  <div class="side-gutter"></div>
+  
+  <section class="flex how-it-works">
+    <div class="side-gutter"></div>
+    <div class="middle-subsection">
+      <h1 class="text-center">How does this website work?</h1>
+      <ul class="sub-nav text-center">
+        <li>
+          <input type="radio" name="sub-menu" id="health-workers-tab" checked />
+          <label
+            for="health-workers-tab"
+            onclick="showDiv('health-workers-sub-section')"
+            >Health Workers</label
+          >
+        </li>
+        <li>
+          <input type="radio" name="sub-menu" id="public-tab" />
+          <label for="public-tab" onclick="showDiv('public-sub-section')"
+            >Public</label
+          >
+        </li>
+        <li>
+          <input type="radio" name="sub-menu" id="researchers-tab" />
+          <label
+            for="researchers-tab"
+            onclick="showDiv('researchers-sub-section')"
+            >Researchers</label
+          >
+        </li>
+      </ul>
+      <!-- div#health-workers-sub-section -->
+      <div class="flex wrap" id="health-workers-sub-section">
+        <div class="half-screen text">
+          <h2 class="text-center">As a health worker, you can:</h2>
+          <ul>
+            <li>Register vaccine takers.</li>
+            <li>Register infection after vaccination, if any.</li>
+            <li>Track your vaccinces' efficiencies.</li>
+            <li>Use filters to screen different vaccinations data.</li>
+          </ul>
+        </div>
+        <div class="half-screen image1"></div>
+      </div>
+      <!-- div#public-sub-section -->
+      <div class="flex wrap" id="public-sub-section" style="display: none">
+        <div class="half-screen text">
+          <h2 class="text-center">As a public member, you can:</h2>
+          <ul>
+            <li>Access your own vaccine records with your ID number.</li>
+            <li>Get a reminder for your next vaccine shot.</li>
+            <li>Review open data on vaccinations.</li>
+          </ul>
+        </div>
+        <div class="half-screen image2"></div>
+      </div>
+      <!-- div#researchers-sub-section -->
+      <div class="flex wrap" id="researchers-sub-section" style="display: none">
+        <div class="half-screen text">
+          <h2 class="text-center">As a researcher, you can:</h2>
+          <ul>
+            <li>Review open data on vaccinations.</li>
+            <li>Analyse different vaccines' efficiencies.</li>
+          </ul>
+        </div>
+        <div class="half-screen image3"></div>
+      </div>
+    </div>
+    <div class="side-gutter"></div>
+  </section>
 </main>
+{% endblock %}
 
-<!-- 
-  {
-    'country': 'Saudi Arabia', 
-    'total_vaccinations': '7136669', 
-    'people_vaccinated': 0, 
-    'people_fully_vaccinated': 0, 
-    'last_updated': '2021-04-18', 
-    'vaccines': 'Oxford/AstraZeneca, Pfizer/BioNTech', 
-    'source': 'https://coronamap.sa'
-  }
- -->
-
+{% block script %}
 <script src="../static/scripts/index.js"></script>
 <script>
   var country_list = JSON.parse('{{ country_list | tojson }}');
-  console.log(country_list);
-  var country_dict = JSON.parse('{{ country_dict | tojson }}');
-  console.log(country_dict);
   autocomplete(document.getElementById('myInput'), country_list);
 </script>
 <script>

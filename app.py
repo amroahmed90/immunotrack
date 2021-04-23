@@ -43,11 +43,11 @@ def index():
     return render_template("index.html", country_list=country_list)
 
 
-@app.route("/country-search", methods=["POST", "GET"])
+@app.route("/country-search")
 def country_search():
     country_list = get_country_list()
     try:
-        country = request.form.get("myCountry").title()
+        country = request.args.get("country").title()
     except:
         return apology("Please make you sure you typed the country name correctly.", "/")
     if country not in country_list:

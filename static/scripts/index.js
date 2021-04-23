@@ -1,4 +1,3 @@
-
 function autocomplete(inp, arr) {
     /*the autocomplete function takes two arguments,
     the text field element and an array of possible autocompleted values:*/
@@ -94,4 +93,22 @@ function autocomplete(inp, arr) {
   document.addEventListener("click", function (e) {
       closeAllLists(e.target);
   });
+  }
+  // function that controls showing/hiding divs with animation
+  function showDiv(div_id) {
+    let div_ids = [
+      'health-workers-sub-section',
+      'public-sub-section',
+      'researchers-sub-section',
+    ];
+    for (var i = 0; i < div_ids.length; i++) {
+      var element = document.getElementById(div_ids[i]);
+      if (div_ids[i] != div_id) {
+        element.setAttribute('style', 'display: none');
+        element.classList.remove('transition');
+      } else {
+        element.setAttribute('style', 'display: flex');
+        element.classList.add('transition');
+      }
+    }
   }
