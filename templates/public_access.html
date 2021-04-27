@@ -1,6 +1,28 @@
-{% extends "layout.html" %} {% block title %} Public Access Page {% endblock %}
-{% block body%}
+{% extends "layout.html" %} {% block head %}
+<meta
+  name="description"
+  content="Login with your ID number and email and see your vaccination history."
+/>
+<link rel="stylesheet" href="../static/styles/public_access.css" />
+{% endblock %} {% block title %} Public Access | ImmunoTrack {% endblock %} {%
+block body%}
 <h1 class="text-center">Public Access</h1>
+<div class="public-sign-in-container">
+  <form action="/public_access_profile" method="POST">
+    <h2 class="text-center">Log in</h2>
+    <p class="text-center">
+      You need to be registered by a health personnel to be able to log in.
+    </p>
+    <input
+      type="number"
+      placeholder="ID Number (registered by your GP)"
+      name="id_number"
+      required
+    />
+    <input type="email" placeholder="Email" name="email" required />
+    <input type="submit" value="LOG IN" />
+  </form>
+</div>
 {% endblock %} {% block script %}
 <script src="../static/scripts/layout.js"></script>
 <script>

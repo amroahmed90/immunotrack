@@ -15,16 +15,17 @@ h2 {
   margin-bottom: 20px;
 }
 
-input[type="text"],
-input[type="number"],
-input[type="email"],
-input[type="date"],
+input[type='text'],
+input[type='number'],
+input[type='email'],
+input[type='date'],
+/* input[type='date'], */
 select {
   max-width: 300px;
   margin: auto;
 }
 
-input[type="radio"] {
+input[type='radio'] {
   padding: 0px 5px;
 }
 

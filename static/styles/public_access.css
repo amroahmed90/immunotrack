@@ -1,0 +1,69 @@
+.public-sign-in-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 10px;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  max-width: 45vw;
+  margin: 25px auto;
+  padding: 5vw;
+}
+h1 {
+  font-size: 4vw;
+  margin-top: 3vh;
+}
+h2 {
+  font-size: 3.5vw;
+}
+p {
+  font-size: 2.5vw;
+}
+.text-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+form input {
+  display: block;
+  border: none;
+  width: 100%;
+  margin: 3vh 0;
+  padding-left: 5px;
+  background-color: #eee;
+  height: 10vh;
+  font-size: 95%;
+}
+::placeholder {
+  font-size: 80%;
+}
+input[type='submit'] {
+  border-radius: 20px;
+  border: 1px solid #ff4b2b;
+  background-color: #ff4b2b;
+  color: #ffffff;
+  font-size: 80%;
+  font-weight: bold;
+  margin: 1.5vh 0px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  height: 9vh;
+}
+input[type='submit']:hover {
+  width: 98%;
+  height: 7.5vh;
+  margin: 3vh auto;
+}
+
+@media (max-width: 640px) {
+  .public-sign-in-container {
+    max-width: 90%;
+  }
+  h1 {
+    font-size: 5vw;
+  }
+  h2 {
+    font-size: 4.5vw;
+  }
+  p {
+    font-size: 3.5vw;
+  }
+}

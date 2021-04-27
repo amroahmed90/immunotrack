@@ -1,4 +1,8 @@
 {% extends "layout.html" %} {% block head %}
+<meta
+  name="description"
+  content="Keep track of covid vaccinations and help us better understand the disease"
+/>
 <link rel="stylesheet" href="../static/styles/index.css" /> {% endblock %} {%
 block title %} Home | ImmunoTrack {% endblock %} {% block body%}
 <main>
@@ -83,7 +87,10 @@ block title %} Home | ImmunoTrack {% endblock %} {% block body%}
           <h2 class="text-center">As a researcher, you can:</h2>
           <ul>
             <li>Review open data on vaccinations.</li>
-            <li>Analyse different vaccines' efficiencies.</li>
+            <li>
+              Analyse different vaccines' efficiencies using the
+              infection-after-vaccination tool.
+            </li>
           </ul>
         </div>
         <div class="half-screen image3"></div>

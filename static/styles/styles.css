@@ -16,14 +16,17 @@
 header {
   background-color: #fdf9fc;
 }
+html {
+  min-height: 100%;
+  position: relative;
+}
 body {
   margin-top: 52.8px;
-  position: relative;
   padding-bottom: var(--minimum-footer-height);
 }
 
 * h1 {
-  font-size: 4vw;
+  font-size: 3.5vw;
 }
 * h2 {
   font-size: 3vw;

@@ -165,6 +165,7 @@ label[for='researchers-tab'] {
 #public-tab:checked ~ label[for='public-tab'],
 #researchers-tab:checked ~ label[for='researchers-tab'] {
   border-bottom: var(--dark-red) 3px solid;
+  color: var(--dark-red);
 }
 
 #health-workers-sub-section,
@@ -217,7 +218,7 @@ label[for='researchers-tab'] {
 
 @media screen and (max-width: 640px) {
   .country-search {
-    padding: 15vh 1vw;
+    padding: 7vh 1vw;
   }
   .middle-subsection {
     flex: 20;

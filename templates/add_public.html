@@ -1,7 +1,12 @@
 {% extends "layout.html" %} {% block title %} Add Record | ImmunoTrack {%
 endblock %} {% block head %}
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"
+/>
 <link rel="stylesheet" href="../static/styles/add_public.css" />
 <script src="../static/scripts/add_public.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/js/intlTelInput.min.js"></script>
 {% endblock %} {% block body%}
 <h1 class="text-center">Add a new public record</h1>
 <form action="/add_public" method="POST">
@@ -53,6 +58,17 @@ endblock %} {% block head %}
             name="email"
             placeholder="Email.."
             class="form-control"
+            required
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md form-group d-flex justify-content-center">
+          <input
+            class="form-control"
+            id="phone"
+            type="tel"
+            name="phone"
             required
           />
         </div>
@@ -215,10 +231,41 @@ endblock %} {% block head %}
       <input type="submit" value="Add Public Record" class="add-button" />
     </div>
     <div class="col-3"></div>
+    <div class="col-3"></div>
+    <div class="col-6 text-center add-div">
+      <a href="/health_worker_profile" class="back-to-profile">
+        Back To Your Profile
+      </a>
+    </div>
+    <div class="col-3"></div>
   </div>
 </form>
 {% endblock %} {% block script %}
 <script>
   style_active_link(1);
+</script>
+<script>
+  function getIp(callback) {
+    fetch('https://ipinfo.io/json?token=0b3dd9f19b4567', {
+      headers: { Accept: 'application/json' },
+    })
+      .then((resp) => resp.json())
+      .catch(() => {
+        return {
+          country: 'us',
+        };
+      })
+      .then((resp) => callback(resp.country));
+  }
+  const phoneInputField = document.querySelector('#phone');
+  var phoneInput = window.intlTelInput(phoneInputField, {
+    separateDialCode: true,
+    preferredCountries: ['in'],
+    hiddenInput: 'full_phone',
+    initialCountry: 'auto',
+    geoIpLookup: getIp,
+    utilsScript:
+      'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/js/utils.js',
+  });
 </script>
 {% endblock %}
