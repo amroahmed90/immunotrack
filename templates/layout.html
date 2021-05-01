@@ -1,110 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Keep track of covid vaccinations and help us better understand the disease"
-    />
-    <meta
-      name="keywords"
-      content="Covid-19, coronavirus, vaccine, vaccine registration"
-    />
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="../static/styles/styles.css" />
-
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://kit.fontawesome.com/52bf6588fd.js"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-      crossorigin="anonymous"
-    ></script>
-
-    <script src="../static/scripts/layout.js"></script>
-
-    {% block head %} {% endblock %}
-
-    <title>{% block title %}{% endblock %}</title>
-    <link rel="shortcut icon" href="../static/images/logo.ico" />
-  </head>
-  <body>
-    <nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark">
-      <div class="container-fluid">
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div
-          class="collapse navbar-collapse justify-content-center"
-          id="navbarSupportedContent"
-        >
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="/">
-                Home <span class="sr-only">(current)</span></a
-              >
-            </li>
-            {% if (not "user_id" in session) or (session.type ==
-            "health_worker") %}
-            <li class="nav-item">
-              <a class="nav-link" href="/health_worker_registration">
-                Health Workers<span class="sr-only">(current)</span>
-              </a>
-            </li>
-            {% endif %} {% if (not "user_id" in session) or
-            (session.type=="public") %}
-            <li class="nav-item">
-              <a class="nav-link" href="/public_access">
-                Public Access<span class="sr-only">(current)</span>
-              </a>
-            </li>
-            {% endif %}
-            <li class="nav-item">
-              <a class="nav-link" href="/about">
-                About <span class="sr-only">(current)</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <header class="text-center">
-      <img
-        class="img-fluid"
-        src="../static/images/logo2.png"
-        alt="Picture of ImmunoTrack Logo"
+   <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta
+         name="description"
+         content="Keep track of covid vaccinations and help us better understand the disease"
       />
-    </header>
-    {% block body %} {% endblock %}
-    <footer></footer>
-    {% block script %} {% endblock %}
-  </body>
+      <meta
+         name="keywords"
+         content="Covid-19, coronavirus, vaccine, vaccine registration"
+      />
+      <link
+         rel="stylesheet"
+         href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+         crossorigin="anonymous"
+      />
+      <link rel="stylesheet" href="../static/styles/styles.css" />
+
+      <script
+         src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+         crossorigin="anonymous"
+      ></script>
+      <script
+         src="https://kit.fontawesome.com/52bf6588fd.js"
+         crossorigin="anonymous"
+      ></script>
+      <script
+         src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+         crossorigin="anonymous"
+      ></script>
+      <script
+         src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+         crossorigin="anonymous"
+      ></script>
+
+      <script src="../static/scripts/layout.js"></script>
+
+      {% block head %} {% endblock %}
+
+      <title>{% block title %}{% endblock %}</title>
+      <link rel="shortcut icon" href="../static/images/logo.ico" />
+   </head>
+   <body>
+      <nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark">
+         <div class="container-fluid">
+            <button
+               class="navbar-toggler"
+               type="button"
+               data-toggle="collapse"
+               data-target="#navbarSupportedContent"
+               aria-controls="navbarSupportedContent"
+               aria-expanded="false"
+               aria-label="Toggle navigation"
+            >
+               <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div
+               class="collapse navbar-collapse justify-content-center"
+               id="navbarSupportedContent"
+            >
+               <ul class="navbar-nav">
+                  <li class="nav-item">
+                     <a class="nav-link" href="/">
+                        Home
+                        <span class="sr-only">(current)</span>
+                     </a>
+                  </li>
+                  {% if (not "user_id" in session) or (session.type ==
+                  "health_worker") %}
+                  <li class="nav-item">
+                     <a class="nav-link" href="/health_worker_registration">
+                        Health Workers
+                        <span class="sr-only">(current)</span>
+                     </a>
+                  </li>
+                  {% endif %} {% if (not "user_id" in session) or
+                  (session.type=="public") %}
+                  <li class="nav-item">
+                     <a class="nav-link" href="/public_access">
+                        Public Access
+                        <span class="sr-only">(current)</span>
+                     </a>
+                  </li>
+                  {% endif %}
+                  <li class="nav-item">
+                     <a class="nav-link" href="/about">
+                        About
+                        <span class="sr-only">(current)</span>
+                     </a>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </nav>
+      <header class="text-center">
+         <img
+            class="img-fluid"
+            src="../static/images/logo2.png"
+            alt="Picture of ImmunoTrack Logo"
+         />
+      </header>
+      {% block body %} {% endblock %}
+      <footer>
+         <div id="google_translate_element"></div>
+      </footer>
+      {% block script %} {% endblock %}
+      <script>
+         function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+               { pageLanguage: 'en' },
+               'google_translate_element'
+            );
+         }
+      </script>
+      <script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+   </body>
 </html>

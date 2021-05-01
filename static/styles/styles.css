@@ -1,49 +1,66 @@
 /* defining universal variables */
 :root {
-  --dark-red: #ac2626;
-  --baltic-sea-color: #343a40;
-  --white-smoke: #f1f1f1;
-  --minimum-footer-height: 6vh;
+   --dark-red: #ac2626;
+   --baltic-sea-color: #343a40;
+   --white-smoke: #f1f1f1;
+   --minimum-footer-height: 6vh;
 }
 
 .nav-item {
-  font-size: larger;
-  margin: 0px 10px;
+   font-size: larger;
+   margin: 0px 10px;
 }
 .nav-link {
-  padding: 4px;
+   padding: 4px;
 }
 header {
-  background-color: #fdf9fc;
+   background-color: #fdf9fc;
 }
 html {
-  min-height: 100%;
-  position: relative;
+   min-height: 100%;
+   position: relative;
 }
 body {
-  margin-top: 52.8px;
-  padding-bottom: var(--minimum-footer-height);
+   margin-top: 52.8px;
+   padding-bottom: var(--minimum-footer-height);
 }
 
 * h1 {
-  font-size: 3.5vw;
+   font-size: 3.5vw;
 }
 * h2 {
-  font-size: 3vw;
+   font-size: 3vw;
 }
 * h3 {
-  font-size: 2.5vw;
+   font-size: 2.5vw;
 }
 
 * p {
-  font-size: 2vw;
+   font-size: 2vw;
 }
 
 footer {
-  background-color: var(--baltic-sea-color);
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  min-height: var(--minimum-footer-height);
+   background-color: var(--baltic-sea-color);
+   position: absolute;
+   bottom: 0;
+   right: 0;
+   left: 0;
+   min-height: var(--minimum-footer-height);
+}
+
+@media (max-width: 640px) {
+   * h1 {
+      font-size: 7vw;
+   }
+   * h2 {
+      font-size: 6vw;
+   }
+   * h3 {
+      font-size: 5vw;
+   }
+
+   * p,
+   * li {
+      font-size: 4vw;
+   }
 }

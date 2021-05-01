@@ -1,5 +1,7 @@
 {
     "python.pythonPath": "env\\Scripts\\python.exe",
     "prettier.jsxSingleQuote": true,
-    "prettier.singleQuote": true
+    "prettier.singleQuote": true,
+    "prettier.htmlWhitespaceSensitivity": "ignore",
+    "prettier.tabWidth": 3
 }

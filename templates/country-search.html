@@ -6,6 +6,9 @@ block title %} Home | ImmunoTrack {% endblock %} {% block body%}
     <div class="side-gutter"></div>
     <div class="middle-subsection country-search revert">
       <h1 class="text-center">World Vaccinations Statistics</h1>
+      <p class="text-center">
+        Type in a country name to see its vaccination progress.
+      </p>
       <!-- autocomplete form with countries -->
       <form autocomplete="off" action="/country-search" method="GET">
         <div class="autocomplete">
@@ -62,8 +65,7 @@ block title %} Home | ImmunoTrack {% endblock %} {% block body%}
         <sub class="floated-left"><strong>Last updated: </strong> {{ country_dict.last_updated }}</sub>
         
         <sub class="floated-right">
-          <strong>Source: </strong
-          ><a href="{{ country_dict.source }}"><em>here.</em></a>
+          <a href="{{ country_dict.source }}" target="_blank"><strong>Source: </strong><em>here.</em></a>
         </p>
       </div>
     </div>

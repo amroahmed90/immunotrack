@@ -88,6 +88,17 @@ def health_worker_registration():
         hospital = request.form.get("hospital")
         if not hospital:
             return apology("Place of work (hospital name) was not provided", route_name)
+        # add the hospital to the database if it's not there
+        with sqlite3.connect(db_name) as conn:
+            c = conn.cursor()
+            c.execute(
+                "SELECT * FROM hospitals WHERE hospital_name = ?", (hospital, ))
+            hospital_result = c.fetchall()
+            print(hospital_result)
+            if not len(hospital_result):
+                c.execute(
+                    "INSERT INTO hospitals (hospital_name) VALUES (?)", (hospital, ))
+                conn.commit()
         email = request.form.get("email").lower()
         if not email:
             return apology("Email was not provided", route_name)
@@ -140,7 +151,11 @@ def health_worker_registration():
             return apology("You can't access this page if you are logged in as public. Please log out and try again.", "/public_access_profile")
     # if the method was GET and they are not logged in
     else:
-        return render_template("health_workers.html")
+        with sqlite3.connect(db_name) as conn:
+            c = conn.cursor()
+            c.execute("SELECT hospital_name FROM hospitals")
+            hospitals_list = c.fetchall()
+            return render_template("health_workers.html", hospitals_list=hospitals_list)
 
 
 @app.route("/logout")

@@ -1,111 +1,126 @@
 {% extends "layout.html" %} {% block head %}
 <meta
-  name="description"
-  content="Keep track of covid vaccinations and help us better understand the disease"
+   name="description"
+   content="Keep track of covid vaccinations and help us better understand the disease"
 />
-<link rel="stylesheet" href="../static/styles/index.css" /> {% endblock %} {%
-block title %} Home | ImmunoTrack {% endblock %} {% block body%}
+<link rel="stylesheet" href="../static/styles/index.css" />
+{% endblock %} {% block title %} Home | ImmunoTrack {% endblock %} {% block
+body%}
 <main>
-  <section class="flex">
-    <div class="side-gutter"></div>
-    <div class="middle-subsection country-search">
-      <h1 class="text-center">World Vaccinations Statistics</h1>
-      <!-- autocomplete form with countries -->
-      <form autocomplete="off" action="/country-search" method="GET">
-        <div class="autocomplete">
-          <input
-            id="myInput"
-            type="text"
-            name="country"
-            placeholder="Country"
-            data="{{county_list}}"
-            autofocus
-            required
-          />
-        </div>
-        <input type="submit" value="Submit" />
-      </form>
-    </div>
-    <div class="side-gutter"></div>
-  </section>
-  <section class="flex how-it-works">
-    <div class="side-gutter"></div>
-    <div class="middle-subsection">
-      <h1 class="text-center">How does this website work?</h1>
-      <ul class="sub-nav text-center">
-        <li>
-          <input type="radio" name="sub-menu" id="health-workers-tab" checked />
-          <label
-            for="health-workers-tab"
-            onclick="showDiv('health-workers-sub-section')"
-            >Health Workers</label
-          >
-        </li>
-        <li>
-          <input type="radio" name="sub-menu" id="public-tab" />
-          <label for="public-tab" onclick="showDiv('public-sub-section')"
-            >Public</label
-          >
-        </li>
-        <li>
-          <input type="radio" name="sub-menu" id="researchers-tab" />
-          <label
-            for="researchers-tab"
-            onclick="showDiv('researchers-sub-section')"
-            >Researchers</label
-          >
-        </li>
-      </ul>
-      <!-- div#health-workers-sub-section -->
-      <div class="flex wrap" id="health-workers-sub-section">
-        <div class="half-screen text">
-          <h2 class="text-center">As a health worker, you can:</h2>
-          <ul>
-            <li>Register vaccine takers.</li>
-            <li>Register infection after vaccination, if any.</li>
-            <li>Track your vaccinces' efficiencies.</li>
-            <li>Use filters to screen different vaccinations data.</li>
-          </ul>
-        </div>
-        <div class="half-screen image1"></div>
+   <section class="flex">
+      <div class="side-gutter"></div>
+      <div class="middle-subsection country-search">
+         <h1 class="text-center">World Vaccinations Statistics</h1>
+         <p class="text-center">
+            Type in a country name to see its vaccination progress.
+         </p>
+         <!-- autocomplete form with countries -->
+         <form autocomplete="off" action="/country-search" method="GET">
+            <div class="autocomplete">
+               <input
+                  id="myInput"
+                  type="text"
+                  name="country"
+                  placeholder="Country"
+                  data="{{county_list}}"
+                  autofocus
+                  required
+               />
+            </div>
+            <input type="submit" value="Submit" />
+         </form>
       </div>
-      <!-- div#public-sub-section -->
-      <div class="flex wrap" id="public-sub-section" style="display: none">
-        <div class="half-screen text">
-          <h2 class="text-center">As a public member, you can:</h2>
-          <ul>
-            <li>Access your own vaccine records with your ID number.</li>
-            <li>Get a reminder for your next vaccine shot.</li>
-            <li>Review open data on vaccinations.</li>
-          </ul>
-        </div>
-        <div class="half-screen image2"></div>
-      </div>
-      <!-- div#researchers-sub-section -->
-      <div class="flex wrap" id="researchers-sub-section" style="display: none">
-        <div class="half-screen text">
-          <h2 class="text-center">As a researcher, you can:</h2>
-          <ul>
-            <li>Review open data on vaccinations.</li>
+      <div class="side-gutter"></div>
+   </section>
+   <section class="flex how-it-works">
+      <div class="side-gutter"></div>
+      <div class="middle-subsection">
+         <h1 class="text-center">How does this website work?</h1>
+         <ul class="sub-nav text-center">
             <li>
-              Analyse different vaccines' efficiencies using the
-              infection-after-vaccination tool.
+               <input
+                  type="radio"
+                  name="sub-menu"
+                  id="health-workers-tab"
+                  checked
+               />
+               <label
+                  for="health-workers-tab"
+                  onclick="showDiv('health-workers-sub-section')"
+               >
+                  Health Workers
+               </label>
             </li>
-          </ul>
-        </div>
-        <div class="half-screen image3"></div>
+            <li>
+               <input type="radio" name="sub-menu" id="public-tab" />
+               <label for="public-tab" onclick="showDiv('public-sub-section')">
+                  Public
+               </label>
+            </li>
+            <li>
+               <input type="radio" name="sub-menu" id="researchers-tab" />
+               <label
+                  for="researchers-tab"
+                  onclick="showDiv('researchers-sub-section')"
+               >
+                  Researchers
+               </label>
+            </li>
+         </ul>
+         <!-- div#health-workers-sub-section -->
+         <div class="flex wrap" id="health-workers-sub-section">
+            <div class="half-screen text">
+               <h2 class="text-center">As a health worker, you can:</h2>
+               <ul>
+                  <li>Register vaccine takers.</li>
+                  <li>Register infection after vaccination, if any.</li>
+                  <li>Track your vaccinces' efficiencies.</li>
+                  <li>Use filters to screen different vaccinations data.</li>
+               </ul>
+            </div>
+            <div class="half-screen image1"></div>
+         </div>
+         <!-- div#public-sub-section -->
+         <div class="flex wrap" id="public-sub-section" style="display: none">
+            <div class="half-screen text">
+               <h2 class="text-center">As a public member, you can:</h2>
+               <ul>
+                  <li>Access your own vaccine records with your ID number.</li>
+                  <li>Get a reminder for your next vaccine shot.</li>
+                  <li>Review open data on vaccinations.</li>
+               </ul>
+            </div>
+            <div class="half-screen image2"></div>
+         </div>
+         <!-- div#researchers-sub-section -->
+         <div
+            class="flex wrap"
+            id="researchers-sub-section"
+            style="display: none"
+         >
+            <div class="half-screen text">
+               <h2 class="text-center">As a researcher, you can:</h2>
+               <ul>
+                  <li>Review open data on vaccinations.</li>
+                  <li>
+                     Analyse different vaccines' efficiencies using the
+                     infection-after-vaccination tool.
+                  </li>
+               </ul>
+            </div>
+            <div class="half-screen image3"></div>
+         </div>
       </div>
-    </div>
-    <div class="side-gutter"></div>
-  </section>
+      <div class="side-gutter"></div>
+   </section>
 </main>
 {% endblock %} {% block script %}
 <script src="../static/scripts/index.js"></script>
 <script>
-  var country_list = JSON.parse('{{ country_list | tojson }}');
-  autocomplete(document.getElementById('myInput'), country_list);
+   var country_list = JSON.parse('{{ country_list | tojson }}');
+   autocomplete(document.getElementById('myInput'), country_list);
 </script>
 <script>
-  style_active_link(0);
+   style_active_link(0);
 </script>
 {% endblock %}
