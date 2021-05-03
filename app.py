@@ -168,7 +168,7 @@ def logout():
 
 @app.route("/health_worker_login", methods=["GET", "POST"])
 def health_worker_login():
-    route_name = "/health_worker_registration"
+    route_name = "/health_worker_login"
     # if the form get submitted and no users are logged in as a health worker
     if (request.method == "POST") and ("user_id" not in session):
         # getting the inputs from the registration form and checking these inputs

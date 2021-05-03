@@ -2,7 +2,6 @@ from functools import wraps
 from flask import session, render_template
 import csv
 import urllib.request
-import time
 
 
 def login_required(f):
@@ -11,7 +10,6 @@ def login_required(f):
 
     https://flask.palletsprojects.com/en/1.1.x/patterns/viewdecorators/
     """
-    time.sleep(2)
 
     @wraps(f)
     def decorated_function(*args, **kwargs):
