@@ -260,4 +260,12 @@ label[for='researchers-tab']:hover {
       color: #000;
       font-weight: bold;
    }
+   #country-search {
+      width: 40vw;
+      font-size: 5vw;
+   }
+   .autocomplete-items,
+   #submit-button {
+      font-size: 5vw;
+   }
 }

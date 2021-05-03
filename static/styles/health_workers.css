@@ -1,13 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 
-h2 {
-   text-align: center;
+.overlay-panel h1,
+.overlay-panel p {
+   text-shadow: 0 0 4px #3c3d3e;
 }
 
 p {
-   font-size: 14px;
+   font-size: 2.5vw;
    font-weight: 100;
-   line-height: 20px;
+   line-height: 2.5vw;
    letter-spacing: 0.5px;
    margin: 20px 0 30px;
 }
@@ -49,7 +50,7 @@ input[type='submit'] {
 }
 
 ::placeholder {
-   font-size: 70%;
+   font-size: 90%;
 }
 
 button:active {
@@ -71,7 +72,7 @@ form {
    align-items: center;
    justify-content: center;
    flex-direction: column;
-   padding: 0 50px;
+   padding: 10px 50px;
    height: 100%;
    text-align: center;
 }
@@ -207,4 +208,13 @@ datalist {
 
 .container.right-panel-active .overlay-right {
    transform: translateX(20%);
+}
+
+@media (max-width: 640px) {
+   form {
+      padding: 20px;
+   }
+   p {
+      line-height: 4vw;
+   }
 }
