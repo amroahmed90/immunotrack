@@ -6,7 +6,7 @@
    flex: 1;
 }
 .middle-gutter {
-   flex: 8;
+   flex: 20;
    display: flex;
    flex-direction: column;
 }
@@ -23,13 +23,10 @@
    border-radius: 5px;
 }
 .screen-based-flex:last-child {
-   margin-bottom: 5vh;
+   margin-bottom: 10vh;
 }
+h2,
 i {
-   color: #ec831d;
-   font-size: 3em;
-}
-h2 {
    color: #ac2626;
    font-size: 3em;
 }

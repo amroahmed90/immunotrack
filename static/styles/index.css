@@ -165,6 +165,9 @@ label[for='public-tab'],
 label[for='researchers-tab'] {
    padding: 0 0.7vw;
    font-size: 3vw;
+   user-select: none;
+   -moz-user-select: none;
+   -webkit-user-select: none;
 }
 
 label[for='health-workers-tab']:hover,
@@ -249,5 +252,12 @@ label[for='researchers-tab']:hover {
    .image2,
    .image3 {
       display: none;
+   }
+   label[for='health-workers-tab']:hover,
+   label[for='public-tab']:hover,
+   label[for='researchers-tab']:hover {
+      background-color: transparent;
+      color: #000;
+      font-weight: bold;
    }
 }
