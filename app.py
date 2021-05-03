@@ -5,6 +5,7 @@ from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.exceptions import default_exceptions
+import time
 
 
 # setting up the flask application
@@ -141,6 +142,7 @@ def health_worker_registration():
             user_id = c.fetchall()
             session["user_id"] = user_id[0][0]
             session["type"] = "health_worker"
+        time.sleep(2)
         return redirect("/health_worker_profile")
     # if there is a user already logged in as a health worker
     elif "type" in session:
