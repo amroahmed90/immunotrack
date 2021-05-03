@@ -110,12 +110,11 @@
       {% block body %} {% endblock %}
 
       <footer>
-         <div class="footer-logo no-copy">&#169;ImmunoTrack</div>
+         <div class="footer-logo no-copy" translate="no">&#169;ImmunoTrack</div>
          <div id="google_translate_element"></div>
       </footer>
 
       {% block script %} {% endblock %}
-      <script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
       <script>
          function googleTranslateElementInit() {
             new google.translate.TranslateElement(
@@ -124,5 +123,6 @@
             );
          }
       </script>
+      <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
    </body>
 </html>
