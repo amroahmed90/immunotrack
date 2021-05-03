@@ -142,7 +142,7 @@ def health_worker_registration():
             user_id = c.fetchall()
             session["user_id"] = user_id[0][0]
             session["type"] = "health_worker"
-        time.sleep(2)
+        time.sleep(5)
         return redirect("/health_worker_profile")
     # if there is a user already logged in as a health worker
     elif "type" in session:
