@@ -1,8 +1,83 @@
-{% extends "layout.html" %} {% block title %} About ImmunoTrack {% endblock %}
-{% block body%}
+{% extends "layout.html" %} {% block title %} About | ImmunoTrack {% endblock %}
+{% block head %}
+<meta name="description" content="About ImmunoTrack" />
+<link rel="stylesheet" href="../static/styles/about.css" />
+{% endblock %} {% block body%}
 <h1 class="text-center">About ImmunoTrack</h1>
 {% endblock %} {% block script %}
+
+<!-- start of page container -->
+<div class="container">
+   <!-- start of left-side gutter -->
+   <div class="side-gutter"></div>
+   <!-- end of left-side gutter -->
+   <!-- start of middle gutter -->
+   <div class="middle-gutter">
+      <!-- start of 1st middle section -->
+      <section class="container screen-based-flex">
+         <div class="half">
+            <p class="text-center">
+               This website retrieves data from
+               <a href="https://ourworldindata.org/coronavirus">
+                  Our World In Data
+               </a>
+               Website. Their data are regularly stored in CSV files format,
+               which can be found in this
+               <a
+                  href="https://github.com/owid/covid-19-data/tree/master/public/data"
+               >
+                  GitHub repository.
+               </a>
+            </p>
+         </div>
+         <div class="half">
+            <i class="fas fa-info-circle"></i>
+            <h2 class="text-center">Resources</h2>
+         </div>
+      </section>
+      <!-- end of 1st middle section -->
+      <!-- start of 2nd middle section -->
+      <section class="container screen-based-flex">
+         <div class="half">
+            <i class="fas fa-user-md"></i>
+            <h2 class="text-center">Health Professionals</h2>
+         </div>
+         <div class="half">
+            <p class="text-center">
+               This website makes it possible for health professionals to
+               register the people they vaccinate in an easy, informative way.
+               <a href="/health_worker_registration">Sign in\up</a>
+               now and make your vaccination recording process much easier.
+            </p>
+         </div>
+      </section>
+      <!-- end of 2nd middle section -->
+      <!-- start of 3rd middle section -->
+      <section class="container screen-based-flex">
+         <div class="half">
+            <p class="text-center">
+               This website makes it easy for those who were vaccinated to see
+               the date of their next dose. If you have been vaccinated and
+               registered here by your doctor, you can
+               <a href="/public_access">log in here</a>
+               and see when your next appointment is.
+            </p>
+         </div>
+         <div class="half">
+            <i class="fas fa-users"></i>
+            <h2 class="text-center">Public</h2>
+         </div>
+      </section>
+      <!-- end of 3rd middle section -->
+   </div>
+   <!-- end of middle gutter -->
+   <!-- start of right-side gutter -->
+   <div class="side-gutter"></div>
+   <!-- start of right-side gutter -->
+</div>
+<!-- end of page container -->
+
 <script>
-  style_active_link(3);
+   style_active_link(3);
 </script>
 {% endblock %}

@@ -3,7 +3,7 @@
    --dark-red: #ac2626;
    --baltic-sea-color: #343a40;
    --white-smoke: #f1f1f1;
-   --minimum-footer-height: 6vh;
+   --minimum-footer-height: 10vh;
 }
 
 .nav-item {
@@ -48,6 +48,17 @@ footer {
    min-height: var(--minimum-footer-height);
 }
 
+/* hide the google translate top bar when translation is active */
+.skiptranslate iframe {
+   display: none;
+}
+
+#google_translate_element {
+   display: inline;
+   float: right;
+   padding: 5px;
+}
+
 @media (max-width: 640px) {
    * h1 {
       font-size: 7vw;
@@ -60,7 +71,8 @@ footer {
    }
 
    * p,
-   * li {
-      font-size: 4vw;
+   * li,
+   * label {
+      font-size: 4vw !important;
    }
 }

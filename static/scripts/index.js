@@ -105,10 +105,19 @@ function autocomplete(inp, arr) {
       var element = document.getElementById(div_ids[i]);
       if (div_ids[i] != div_id) {
         element.setAttribute('style', 'display: none');
-        element.classList.remove('transition');
+        element.classList.remove('animate');
       } else {
         element.setAttribute('style', 'display: flex');
-        element.classList.add('transition');
+        element.classList.add('animate');
       }
     }
   }
+
+  // make the form submittable by clicking the enter key
+  var input = document.getElementById("country-search");
+  input.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+    event.preventDefault();
+    document.getElementById("submit-button").click();
+    }
+  });

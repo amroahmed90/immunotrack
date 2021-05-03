@@ -13,7 +13,7 @@ block title %} Home | ImmunoTrack {% endblock %} {% block body%}
       <form autocomplete="off" action="/country-search" method="GET">
         <div class="autocomplete">
           <input
-            id="myInput"
+            id="country-search"
             type="text"
             name="country"
             placeholder="Country"
@@ -22,7 +22,7 @@ block title %} Home | ImmunoTrack {% endblock %} {% block body%}
             autofocus
           />
         </div>
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Submit" id="submit-button"/>
       </form>
       <div class="search-results">
         <h2 class="text-center">
@@ -146,7 +146,7 @@ block title %} Home | ImmunoTrack {% endblock %} {% block body%}
 <script src="../static/scripts/index.js"></script>
 <script>
   var country_list = JSON.parse('{{ country_list | tojson }}');
-  autocomplete(document.getElementById('myInput'), country_list);
+  autocomplete(document.getElementById('country-search'), country_list);
 </script>
 <script>
   style_active_link(0);

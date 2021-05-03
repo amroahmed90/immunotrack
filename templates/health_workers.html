@@ -1,12 +1,16 @@
 {% extends "layout.html" %} {% block head %}
 <link rel="stylesheet" href="../static/styles/health_workers.css" />
-{% endblock %} {% block title %} Health Worker Page {% endblock %} {% block
-body%}
+{% endblock %} {% block title %} Health Workers | ImmunoTrack {% endblock %} {%
+block body%}
 
 <h1 class="text-center">Health Workers Access</h1>
 <div class="container" id="container">
    <div class="form-container sign-up-container">
-      <form action="/health_worker_registration" method="POST">
+      <form
+         action="/health_worker_registration"
+         method="POST"
+         autocomplete="off"
+      >
          <h1>Register</h1>
          <input type="text" placeholder="First Name" name="fname" required />
          <input type="text" placeholder="Middle Name (optional)" name="mname" />
@@ -47,7 +51,7 @@ body%}
       </form>
    </div>
    <div class="form-container sign-in-container">
-      <form action="/health_worker_login" method="POST">
+      <form action="/health_worker_login" method="POST" autocomplete="off">
          <h1>Log in</h1>
          <input type="email" placeholder="Email" name="email" />
          <input type="password" placeholder="Password" name="password" />

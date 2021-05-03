@@ -171,6 +171,9 @@ label[for='health-workers-tab']:hover,
 label[for='public-tab']:hover,
 label[for='researchers-tab']:hover {
    cursor: pointer;
+   color: #fff;
+   background-color: var(--baltic-sea-color);
+   border-radius: 5px;
 }
 
 #health-workers-tab:checked ~ label[for='health-workers-tab'],
@@ -216,7 +219,7 @@ label[for='researchers-tab']:hover {
    background-image: url('../images/researchers.jpg');
 }
 
-.transition {
+.animate {
    animation: opacity 500ms 1 forwards ease-in-out;
 }
 @keyframes opacity {
