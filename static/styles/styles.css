@@ -60,6 +60,8 @@ footer {
 #google_translate_element {
    display: inline;
    padding: 5px;
+   width: 161px;
+   height: 55px;
 }
 
 .footer-logo {
