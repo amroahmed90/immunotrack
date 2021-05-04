@@ -145,7 +145,8 @@ def health_worker_registration():
         time.sleep(7)
         return redirect("/health_worker_profile")
     # if there is a user already logged in as a health worker
-    elif (request.method == "GET") and ("type" in session):
+    time.sleep(2)
+    elif "type" in session:
         if session["type"] == "health_worker":
             return redirect("/health_worker_profile")
         # if the method was GET but user is logged in as a public
@@ -157,6 +158,7 @@ def health_worker_registration():
             c = conn.cursor()
             c.execute("SELECT hospital_name FROM hospitals")
             hospitals_list = c.fetchall()
+            time.sleep(2)
             return render_template("health_workers.html", hospitals_list=hospitals_list)
 
 
