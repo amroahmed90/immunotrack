@@ -261,11 +261,11 @@ label[for='researchers-tab']:hover {
       font-weight: bold;
    }
    #country-search {
-      width: 40vw;
-      font-size: 5vw;
+      width: 30vw;
+      font-size: 3.5vw;
    }
    .autocomplete-items,
    #submit-button {
-      font-size: 5vw;
+      font-size: 3.5vw;
    }
 }

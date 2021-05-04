@@ -65,7 +65,7 @@ def country_search():
 def health_worker_registration():
     route_name = "/health_worker_registration"
     # if the form get submitted and no users are logged in
-    if (request.method == "POST") and ("user_id" not in session):
+    if (request.method == "POST") and ("user_id" not in session.keys()):
         # getting the inputs from the registration form and checking these inputs
         fname = request.form.get("fname").title()
         if not fname:
@@ -145,7 +145,7 @@ def health_worker_registration():
         time.sleep(7)
         return redirect("/health_worker_profile")
     # if there is a user already logged in as a health worker
-    elif "type" in session:
+    elif "type" in session.keys():
         if session["type"] == "health_worker":
             return redirect("/health_worker_profile")
         # if the method was GET but user is logged in as a public
@@ -153,8 +153,6 @@ def health_worker_registration():
             return apology("You can't access this page if you are logged in as public. Please log out and try again.", "/public_access_profile")
     # if the method was GET and they are not logged in
     else:
-        if ("type" in session) and (session["type"] == "health_worker"):
-            return redirect("/health_worker_profile")
         with sqlite3.connect(db_name) as conn:
             c = conn.cursor()
             c.execute("SELECT hospital_name FROM hospitals")
@@ -173,7 +171,7 @@ def logout():
 def health_worker_login():
     route_name = "/health_worker_login"
     # if the form get submitted and no users are logged in as a health worker
-    if (request.method == "POST") and ("user_id" not in session):
+    if (request.method == "POST") and ("user_id" not in session.keys()):
         # getting the inputs from the registration form and checking these inputs
         email = request.form.get("email").lower()
         if not email:
@@ -205,7 +203,7 @@ def health_worker_login():
             else:
                 return apology("The password you provided is not correct.", route_name)
     # if the method was GET and user signed in as public
-    elif ("user_id" in session) and (session["type"] == "public"):
+    elif ("user_id" in session.keys()) and (session["type"] != "health_worker"):
         return apology("You can't access this page while logged in as a public member, please log out first", "/public_access_profile")
     # if te method is GET
     else:
@@ -215,6 +213,7 @@ def health_worker_login():
 @app.route("/health_worker_profile")
 @login_required
 def health_worker_profile():
+    time.sleep(2)
     if session["type"] != "health_worker":
         return apology("You need to be logged in as a health worker to access this page. Please log out and try again.", "/public_access_profile")
     # get the logged in health worker
@@ -349,7 +348,7 @@ def add_public():
 @app.route("/public_access")
 def public_access():
     # if user is already logged in as public
-    if ("user_id" not in session) or (not session["user_id"]):
+    if "user_id" not in session.keys():
         return render_template("public_access.html")
     elif session["type"] == "public":
         return redirect("/public_access_profile")
@@ -362,7 +361,7 @@ def public_access():
 def public_access_profile():
     route_name = "/public_access"
     # if the method is POST and the user is not signed in
-    if (request.method == "POST") and (("user_id" not in session) or (not session["user_id"])):
+    if (request.method == "POST") and ("user_id" not in session.keys()):
         social_number = request.form.get("id_number")
         if not social_number:
             return apology("Social number was not provided.", route_name)
@@ -406,7 +405,7 @@ def public_access_profile():
                     " " + vaccinating_person[3]
             return render_template("public_access_profile.html", user_data=user_data, vaccination_data=vaccination_data)
     # check if logged in as public (method GET)
-    elif ("user_id" in session) and (session["type"] == "public"):
+    elif ("user_id" in session.keys()) and (session["type"] == "public"):
         with sqlite3.connect(db_name) as conn:
             # seting up a cursor on which you'll execute sqlite commands
             c = conn.cursor()
