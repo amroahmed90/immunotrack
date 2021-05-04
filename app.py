@@ -145,7 +145,6 @@ def health_worker_registration():
         time.sleep(7)
         return redirect("/health_worker_profile")
     # if there is a user already logged in as a health worker
-    time.sleep(2)
     elif "type" in session:
         if session["type"] == "health_worker":
             return redirect("/health_worker_profile")
@@ -154,6 +153,8 @@ def health_worker_registration():
             return apology("You can't access this page if you are logged in as public. Please log out and try again.", "/public_access_profile")
     # if the method was GET and they are not logged in
     else:
+        if session["type"] == "health_worker":
+            return redirect("/health_worker_profile")
         with sqlite3.connect(db_name) as conn:
             c = conn.cursor()
             c.execute("SELECT hospital_name FROM hospitals")
