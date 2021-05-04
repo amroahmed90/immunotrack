@@ -364,7 +364,7 @@ def public_access():
 def public_access_profile():
     route_name = "/public_access"
     # if the method is POST and the user is not signed in
-    if request.method == "POST" and (("user_id" not in session) or (not session["user_id"])):
+    if (request.method == "POST") and (("user_id" not in session) or (not session["user_id"])):
         social_number = request.form.get("id_number")
         if not social_number:
             return apology("Social number was not provided.", route_name)
