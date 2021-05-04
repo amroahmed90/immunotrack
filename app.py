@@ -145,7 +145,7 @@ def health_worker_registration():
         time.sleep(5)
         return redirect("/health_worker_profile")
     # if there is a user already logged in as a health worker
-    elif "type" in session:
+    elif (request.method == "GET") and ("type" in session):
         if session["type"] == "health_worker":
             return redirect("/health_worker_profile")
         # if the method was GET but user is logged in as a public
