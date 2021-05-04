@@ -237,7 +237,6 @@ def health_worker_profile():
 
 # a route to handle adding new public (patient\vaccine taker) record
 @app.route("/add_public", methods=["POST", "GET"])
-@login_required
 def add_public():
     route_name = "/health_worker_registration"
     if request.method == "POST":
@@ -343,7 +342,6 @@ def add_public():
             c.execute("SELECT vaccine_name FROM vaccines ORDER BY vaccine_name")
             vaccines = c.fetchall()
             conn.commit()
-            print(vaccines[0][0])
             return render_template("add_public.html", health_worker_data=health_worker_data[0], vaccines=vaccines)
 
 
