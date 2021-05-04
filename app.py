@@ -142,7 +142,7 @@ def health_worker_registration():
             user_id = c.fetchall()
             session["user_id"] = user_id[0][0]
             session["type"] = "health_worker"
-        time.sleep(5)
+        time.sleep(7)
         return redirect("/health_worker_profile")
     # if there is a user already logged in as a health worker
     elif (request.method == "GET") and ("type" in session):
@@ -197,6 +197,7 @@ def health_worker_login():
             if check_password_hash(result[0][1], password):
                 session["user_id"] = result[0][0]
                 session["type"] = "health_worker"
+                time.sleep(4)
                 return redirect("/health_worker_profile")
             else:
                 return apology("The password you provided is not correct.", route_name)
