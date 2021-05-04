@@ -197,7 +197,7 @@ def health_worker_login():
             if check_password_hash(result[0][1], password):
                 session["user_id"] = result[0][0]
                 session["type"] = "health_worker"
-                time.sleep(4)
+                time.sleep(7)
                 return redirect("/health_worker_profile")
             else:
                 return apology("The password you provided is not correct.", route_name)
