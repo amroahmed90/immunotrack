@@ -5,12 +5,11 @@ from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.exceptions import default_exceptions
-import time
-
+import os
 
 # setting up the flask application
 app = Flask(__name__)
-app.secret_key = "dev"
+app.secret_key = os.urandom(12).hex()
 
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
@@ -143,7 +142,6 @@ def health_worker_registration():
             user_id = c.fetchall()
             session["user_id"] = user_id[0][0]
             session["type"] = "health_worker"
-        time.sleep(7)
         return redirect("/health_worker_profile")
     # if there is a user already logged in as a health worker
     elif "type" in session.keys():
@@ -158,7 +156,6 @@ def health_worker_registration():
             c = conn.cursor()
             c.execute("SELECT hospital_name FROM hospitals")
             hospitals_list = c.fetchall()
-            time.sleep(2)
             return render_template("health_workers.html", hospitals_list=hospitals_list)
 
 
@@ -199,7 +196,6 @@ def health_worker_login():
             if check_password_hash(result[0][1], password):
                 session["user_id"] = result[0][0]
                 session["type"] = "health_worker"
-                time.sleep(7)
                 return redirect("/health_worker_profile")
             else:
                 return apology("The password you provided is not correct.", route_name)
@@ -214,7 +210,6 @@ def health_worker_login():
 @app.route("/health_worker_profile")
 @login_required
 def health_worker_profile():
-    time.sleep(2)
     if session["type"] != "health_worker":
         return apology("You need to be logged in as a health worker to access this page. Please log out and try again.", "/public_access_profile")
     # get the logged in health worker
