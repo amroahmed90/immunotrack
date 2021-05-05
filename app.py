@@ -10,6 +10,7 @@ import time
 
 # setting up the flask application
 app = Flask(__name__)
+app.secret_key = "dev"
 
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
